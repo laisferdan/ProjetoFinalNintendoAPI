@@ -16,7 +16,7 @@ Antes de começar, verifique se você atende aos seguintes requisitos:
 * JSON
 * JWT
 * CORS
-* 
+
 
 ## 🚀 Sobre o projeto
 Criar uma API REST de acordo com os requisitos listados abaixo:
