@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetoFinalNintendoAPI", "ProjetoFinalNintendoAPI.csproj", "{9EF3868D-A8BF-4DF6-AC5D-EEB35691B3AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjetoFinalNintendoAPI", "ProjetoFinalNintendoAPI.csproj", "{9EF3868D-A8BF-4DF6-AC5D-EEB35691B3AE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{916740E5-5D44-4D8E-989F-929CC348F7B4}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		final_project_web_III_instructions.md = final_project_web_III_instructions.md
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,6 +26,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9EF3868D-A8BF-4DF6-AC5D-EEB35691B3AE} = {916740E5-5D44-4D8E-989F-929CC348F7B4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {19D9B4FD-98FC-4248-BE22-81E4E42C1126}
