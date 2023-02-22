@@ -4,6 +4,8 @@
 
 > Final Project from Let's Code by ADA Bootcamp of Web Programming III Module.
 
+You can check the detailed instructions (pt-br) on [final_project_web_III_instructions.md](https://github.com/laisferdan/ProjetoFinalNintendoAPI/blob/master/final_project_web_III_instructions.md)
+
 This project is a .NET Web-API application in C#. The data source was the Nintendo Games data from 2008 to 2021.
 <br/>
 
