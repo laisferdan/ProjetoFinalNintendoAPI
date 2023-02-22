@@ -61,11 +61,12 @@ namespace ProjetoFinalNintendoAPI.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(NintendoGamesModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(NintendoGamesModel), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(NintendoGamesModel), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Get([FromRoute] int id)
         {
             var game = await _repository.GetByKey(id);
             if (game == null)
-                throw new NullReferenceException();
+                return NotFound("Error message");
 
             return Ok(game);
         }
@@ -128,7 +129,7 @@ namespace ProjetoFinalNintendoAPI.Controllers
         {
             var databaseNintendo = await _repository.GetByKey(id);
             if (databaseNintendo == null)
-                return NotFound("Id inexistente");
+                return NotFound("Non-existent id");
 
             var deleted = await _repository.Delete(id);
             return Ok(deleted);
