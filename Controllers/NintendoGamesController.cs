@@ -53,7 +53,7 @@ namespace ProjetoFinalNintendoAPI.Controllers
         {
             var games = await _repository.Get(page, maxResults);
             if (games == null)
-                return NotFound("Id inexistente");
+                return NotFound("Non-existent id");
 
             return Ok(games);
         }
@@ -115,7 +115,7 @@ namespace ProjetoFinalNintendoAPI.Controllers
         {
             var databaseGames = await _repository.GetByKey(id);
             if (databaseGames == null)
-                return NotFound("Id inexistente");
+                return NotFound("Non-existent id");
 
             databaseGames.Platform = entity.Platform;
             var updated = await _repository.Update(databaseGames);
