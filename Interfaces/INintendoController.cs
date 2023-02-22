@@ -4,7 +4,7 @@ namespace ProjetoFinalNintendoAPI.Interfaces
 {
     public interface INintendoController<T, K, D>
     {
-        Task<IActionResult> Get(int page, int maxResults);
+        Task<IActionResult> GetAllRecordsWithPagination(int page, int limit);
         Task<IActionResult> Get(int id);
         Task<IActionResult> Post(K entity);
         Task<IActionResult> Put(int id, K entity);

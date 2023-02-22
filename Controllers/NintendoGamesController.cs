@@ -4,6 +4,7 @@ using ProjetoFinalNintendoAPI.Dto;
 using ProjetoFinalNintendoAPI.Filters;
 using ProjetoFinalNintendoAPI.Interfaces;
 using ProjetoFinalNintendoAPI.Models;
+using System.ComponentModel.DataAnnotations;
 using System.Net.Mime;
 
 namespace ProjetoFinalNintendoAPI.Controllers
@@ -34,7 +35,7 @@ namespace ProjetoFinalNintendoAPI.Controllers
         [ProducesResponseType(typeof(NintendoGamesModel), StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Post([FromBody] FilteredNintendoGamesDto entity, [FromQuery] int page, int maxResults)
         {
-            var games = await _repository.Get(page, maxResults);
+            var games = await _repository.GetAsync(page, maxResults);
             var filtered = games.Where(g => g.Title.Contains(entity.Title) || 
             g.Platform.Contains(entity.Platform) || 
             g.Developers.Contains(entity.Developers)).ToList();
@@ -48,10 +49,11 @@ namespace ProjetoFinalNintendoAPI.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(NintendoGamesModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(NintendoGamesModel), StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(NintendoGamesModel), StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Get([FromQuery] int page, int maxResults)
+        public async Task<IActionResult> GetAllRecordsWithPagination([FromQuery, Required] int page, [FromQuery, Required] int limit)
         {
-            var games = await _repository.Get(page, maxResults);
+            var games = await _repository.GetAsync(page, limit);
             if (games == null)
                 return NotFound("Non-existent id");
 

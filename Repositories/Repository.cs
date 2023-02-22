@@ -28,7 +28,7 @@ namespace ProjetoFinalNintendoAPI.Repositories
             });
         }
 
-        public Task<IQueryable<T>> Get(int page, int maxResults)
+        public Task<IQueryable<T>> GetAsync(int page, int maxResults)
         {
             return Task.Run(() =>
             {
