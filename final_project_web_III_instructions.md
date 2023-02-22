@@ -1,24 +1,4 @@
 ﻿# ProjetoFinalNintendoAPI
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Nintendo.svg/1200px-Nintendo.svg.png" alt="exemplo imagem">
-
-> Projeto final do módulo Programação Web III do curso da Let's Code by Ada.
-
-## 💻 Pré-requisitos
-Antes de começar, verifique se você atende aos seguintes requisitos:
-* Você possui a versão de `<.NET 6.0>`;
-* Você tem uma máquina `<Windows / Linux / Mac>`.
-
-
-## 👩‍💻 Tecnologias utilizadas
-* .NET 6.0
-* C#
-* JSON
-* JWT
-* CORS
-
-
-## 🚀 Sobre o projeto
 Criar uma API REST de acordo com os requisitos listados abaixo:
 - [x] O sistema deve ter um mecanismo de login usando JWT, com um endpoint que recebe `{ "login":"usuario", "senha":"m1nh@s3nh@"}` e gera um token;
 - [x] O JWT deve ter, as seguintes claims:
