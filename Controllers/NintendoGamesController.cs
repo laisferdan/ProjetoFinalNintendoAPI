@@ -55,7 +55,7 @@ namespace ProjetoFinalNintendoAPI.Controllers
         {
             var games = await _repository.GetAsync(page, limit);
             if (games == null)
-                return NotFound("Non-existent id");
+                return NotFound("Error message");
 
             return Ok(games);
         }
