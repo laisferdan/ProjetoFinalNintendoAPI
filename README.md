@@ -122,7 +122,7 @@ Request body is not necessary
 
 ### Authentication <a name="Authentication"></a>
 You need to append a token on header's request. <br/>
-See more details at [Authentication](#Authentication) topic.
+See more details in the [Authentication](#Authentication) topic.
 
 ### Responses
 <table>
