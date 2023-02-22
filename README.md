@@ -115,7 +115,7 @@ http://localhost:5000
 This endpoint returns information about a specific Nintendo Game record.
 
 ### Endpoint
-`GET /NintendoGames/{id}
+`GET /NintendoGames/{id}`
 
 ### Request
 Request body is not necessary
