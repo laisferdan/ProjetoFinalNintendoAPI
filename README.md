@@ -108,3 +108,76 @@ http://localhost:5000
 | `PUT /NintendoGames/{id} `   | Yes                    | Update an existing record or Create a new record         |
 | `PATCH /NintendoGames/{id} ` | Yes                    | Update the platform string of an existing record         |
 | `DELETE /NintendoGames/{id} `| Yes                    | Delete an existing record                                |
+
+<br />
+
+## Search a Nintendo Game record
+This endpoint returns information about a specific Nintendo Game record.
+
+### Endpoint
+`GET /NintendoGames/{id}
+
+### Request
+Request body is not necessary
+
+### Authentication <a name="Authentication"></a>
+You need to append a token on header's request. <br/>
+See more details at [Authentication](#Authentication) topic.
+
+### Responses
+<table>
+  <tr>
+    <td> <strong>Status</strong> </td>
+    <td> <strong>Description</strong> </td>
+    <td> <strong>Example</strong> </td>
+  </tr>
+  <tr>
+    <td> 200 - OK </td>
+    <td> A single record is returned </td>
+    <td>
+
+```json
+{
+  "id": 1,
+  "title": "Super Mario 3D World + Bowser's Fury",
+  "platform": "Switch",
+  "release_date": "Feb 12, 2021",
+  "user_score": "",
+  "link": "/game/switch/super-mario-3d-world-+-bowsers-fury",
+  "developers": "['Nintendo']"
+}
+```
+
+</td>
+  </tr>
+<tr>
+<td> 404 - Not Found </td>
+<td> Invalid URL or ID not found </td>
+<td>
+
+```json
+{
+  "message": "Error message"
+}
+```
+
+<tr>
+<td> 500 - Internal Server Error </td>
+<td> General error message </td>
+<td>
+
+```json
+{
+  "message": "An unexpected error has occurred!"
+}
+```
+
+</td>
+</tr>
+
+</td>
+</tr>
+</table>
+
+<br />
+</table>
