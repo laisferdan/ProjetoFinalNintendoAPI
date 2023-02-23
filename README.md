@@ -106,7 +106,7 @@ http://localhost:5000
 | `POST /NintendoGames`        | Yes                    | Create a new Nintendo Game record                        |
 | `POST /NintendoGames/query`  | Yes                    | Search and filter Nintendo Game records with pagination  |
 | `PUT /NintendoGames/{id} `   | Yes                    | Update an existing record or Create a new record         |
-| `PATCH /NintendoGames/{id} ` | Yes                    | Update the platform string of an existing record         |
+| `PATCH /NintendoGames/{id} ` | Yes                    | Update the platform of an existing record                |
 | `DELETE /NintendoGames/{id} `| Yes                    | Delete an existing record                                |
 
 <br />
