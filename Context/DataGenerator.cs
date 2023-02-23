@@ -14,17 +14,17 @@ namespace ProjetoFinalNintendoAPI.Context
             _configuration = configuration;
         }
 
-        public void Generate()
+        public void GenerateInMemory()
         {
             if (!_inMemoryContext.NintendoGames.Any())
             {
-                List<NintendoGamesModel> items;
-                using (StreamReader r = new StreamReader("nintendoGamesData.json"))
+                List<NintendoGamesModel> nintendoGames;
+                using (StreamReader reader = new StreamReader("nintendoGamesData.json"))
                 {
-                    string json = r.ReadToEnd();
-                    items = JsonSerializer.Deserialize<List<NintendoGamesModel>>(json);
+                    string json = reader.ReadToEnd();
+                    nintendoGames = JsonSerializer.Deserialize<List<NintendoGamesModel>>(json);
                 }
-                _inMemoryContext.NintendoGames.AddRange(items);
+                _inMemoryContext.NintendoGames.AddRange(nintendoGames);
                 _inMemoryContext.SaveChanges();
             }
 
@@ -32,8 +32,8 @@ namespace ProjetoFinalNintendoAPI.Context
             {
                 var user = new List<UsersModel>()
                 {
-                    new() {Name = "Laís", Password = _configuration["UserAuthentication:senha"], 
-                        Username = _configuration["UserAuthentication:login"], Role = "Developer" }
+                    new() {Name = "Laís", Password = _configuration["UserAuthentication:password"], 
+                        Username = _configuration["UserAuthentication:username"], Role = "Developer" }
                 };
                 _inMemoryContext.Users.AddRange(user);
                 _inMemoryContext.SaveChanges();

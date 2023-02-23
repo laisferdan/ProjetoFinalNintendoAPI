@@ -33,9 +33,9 @@ namespace ProjetoFinalNintendoAPI.Controllers
         [HttpPost("query")]
         [ProducesResponseType(typeof(NintendoGamesModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(NintendoGamesModel), StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> Post([FromBody] FilteredNintendoGamesDto entity, [FromQuery] int page, int maxResults)
+        public async Task<IActionResult> Post([FromBody] FilteredNintendoGamesDto entity, [FromQuery] int page, int limit)
         {
-            var games = await _repository.GetAsync(page, maxResults);
+            var games = await _repository.GetAsync(page, limit);
             var filtered = games.Where(g => g.Title.Contains(entity.Title) || 
             g.Platform.Contains(entity.Platform) || 
             g.Developers.Contains(entity.Developers)).ToList();
@@ -55,7 +55,7 @@ namespace ProjetoFinalNintendoAPI.Controllers
         {
             var games = await _repository.GetAsync(page, limit);
             if (games == null)
-                return NotFound("Error message");
+                return NotFound("Records not found.");
 
             return Ok(games);
         }
@@ -64,11 +64,11 @@ namespace ProjetoFinalNintendoAPI.Controllers
         [ProducesResponseType(typeof(NintendoGamesModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(NintendoGamesModel), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(NintendoGamesModel), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Get([FromRoute] int id)
+        public async Task<IActionResult> GetSingleRecord([FromRoute] int id)
         {
             var game = await _repository.GetByKey(id);
             if (game == null)
-                return NotFound("Error message");
+                return NotFound("Record not found.");
 
             return Ok(game);
         }

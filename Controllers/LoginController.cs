@@ -24,14 +24,14 @@ namespace ProjetoFinalNintendoAPI.Controllers
 
         [HttpPost]
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(List<string>), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Login([FromBody] Authenticate request)
         {
-            var username = _configuration["UserAuthentication:login"];
-            var password = _configuration["UserAuthentication:senha"];
+            var username = _configuration["UserAuthentication:username"];
+            var password = _configuration["UserAuthentication:password"];
             var user = await _repository.Get(request.Username, request.Password);
             if (username != request.Username && password != request.Password)
-                return Unauthorized(new { message = "Usuário ou senha inválidos" });
+                return Unauthorized(new { message = "Invalid username or password" });
 
             var token = _generateToken.GenerateJwt(user);
             user.Password = "";
