@@ -36,7 +36,7 @@ namespace ProjetoFinalNintendoAPI
                 option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     In = ParameterLocation.Header,
-                    Description = "Informe o token",
+                    Description = "Inform the token",
                     Name = "Authorization",
                     Type = SecuritySchemeType.Http,
                     BearerFormat = "JWT",
@@ -119,7 +119,7 @@ namespace ProjetoFinalNintendoAPI
             using (var scope = scopedFactory.CreateScope())
             {
                 var service = scope.ServiceProvider.GetService<DataGenerator>();
-                service.Generate();
+                service.GenerateInMemory();
             }
 
             app.Run();
