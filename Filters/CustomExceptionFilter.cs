@@ -11,7 +11,7 @@ namespace ProjetoFinalNintendoAPI.Filters
             {
                 context.Result = new ObjectResult(new
                 {
-                    message = "Id não encontrado."
+                    message = "Id not found."
                 })
                 {
                     StatusCode = StatusCodes.Status404NotFound
@@ -21,7 +21,7 @@ namespace ProjetoFinalNintendoAPI.Filters
             {
                 context.Result = new ObjectResult(new
                 {
-                    message = "Item desejado não encontrado."
+                    message = "Item not found."
                 })
                 { 
                     StatusCode = StatusCodes.Status204NoContent
@@ -31,7 +31,7 @@ namespace ProjetoFinalNintendoAPI.Filters
             {
                 context.Result = new ObjectResult(new
                 {
-                    message = "Ops! Ocorreu um erro inesperado"
+                    message = "An unexpected error occurred."
                 })
                 {
                     StatusCode = StatusCodes.Status500InternalServerError

@@ -20,7 +20,7 @@ namespace ProjetoFinalNintendoAPI.Repositories
 
                 if (entity == null)
                 {
-                    throw new Exception("Id inexistente.");
+                    throw new Exception("Non-existent id.");
                 }
                 _context.Remove(entity);
                 _context.SaveChanges();

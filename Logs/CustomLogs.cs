@@ -14,11 +14,11 @@ namespace ProjetoFinalNintendoAPI.Logs
 
             if (method.Equals(PUT, StringComparison.InvariantCultureIgnoreCase) || method.Equals(PATCH, StringComparison.InvariantCultureIgnoreCase))
             {
-                Console.WriteLine($"{now} - {message} {id} - {title} - Alterado de {JsonSerializer.Serialize(entityBefore)} para {JsonSerializer.Serialize(entityAfter)}");
+                Console.WriteLine($"{now} - {message} {id} - {title} - Changed from {JsonSerializer.Serialize(entityBefore)} to {JsonSerializer.Serialize(entityAfter)}");
             }
             else if (method.Equals(DELETE, StringComparison.InvariantCultureIgnoreCase))
             {
-                Console.WriteLine($"{now} - {message} {id} - {title} - Removido");
+                Console.WriteLine($"{now} - {message} {id} - {title} - Removed");
             }
         }
     }
