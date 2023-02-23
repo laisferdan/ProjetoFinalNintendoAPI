@@ -101,10 +101,10 @@ http://localhost:5000
 ### NintendoGames
 |    **Method**                | **Authentication?**    |                      **Description**                     |
 | ---------------------------- | ---------------------- | -------------------------------------------------------- |
-| `GET /NintendoGames`         | Yes                    | Search all Nintendo Games records with pagination        |
-| `GET /NintendoGames/{id} `   | Yes                    | Search a Nintendo Games record by its id                 |
+| `GET /NintendoGames`         | Yes                    | Search all Nintendo Game records with pagination         |
+| `GET /NintendoGames/{id} `   | Yes                    | Search a Nintendo Game record by its id                  |
 | `POST /NintendoGames`        | Yes                    | Create a new Nintendo Game record                        |
-| `POST /NintendoGames/query`  | Yes                    | Search and filter Nintendo Games records with pagination |
+| `POST /NintendoGames/query`  | Yes                    | Search and filter Nintendo Game records with pagination  |
 | `PUT /NintendoGames/{id} `   | Yes                    | Update an existing record or Create a new record         |
 | `PATCH /NintendoGames/{id} ` | Yes                    | Update the platform string of an existing record         |
 | `DELETE /NintendoGames/{id} `| Yes                    | Delete an existing record                                |
