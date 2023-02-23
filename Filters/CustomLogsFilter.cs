@@ -29,7 +29,7 @@ namespace ProjetoFinalNintendoAPI.Filters
                         || context.HttpContext.Request.Method.Equals("patch", StringComparison.InvariantCultureIgnoreCase)
                         || context.HttpContext.Request.Method.Equals("delete", StringComparison.InvariantCultureIgnoreCase))
                     {
-                        var game = _repository.GetByKey(id).Result;
+                        var game = _repository.GetAsyncById(id).Result;
                         if (game != null)
                         {
                             var gameClone = game.clone();
@@ -51,7 +51,7 @@ namespace ProjetoFinalNintendoAPI.Filters
                         || context.HttpContext.Request.Method.Equals("patch", StringComparison.InvariantCultureIgnoreCase))
                     {
                         var id = int.Parse(idToParse);
-                        var afterUpdate = _repository.GetByKey(id).Result;
+                        var afterUpdate = _repository.GetAsyncById(id).Result;
                         if (afterUpdate != null)
                         {
                             NintendoGamesModel beforeUpdate;

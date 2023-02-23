@@ -1,5 +1,6 @@
 ﻿using ProjetoFinalNintendoAPI.Interfaces;
 using ProjetoFinalNintendoAPI.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace ProjetoFinalNintendoAPI.Repositories
 {
@@ -12,57 +13,35 @@ namespace ProjetoFinalNintendoAPI.Repositories
             _context = context;
         }
 
-        public Task<int> Delete(int key)
+        public async Task<int> DeleteAsync(T entity)
         {
-            return Task.Run(() =>
-            {
-                var entity = _context.Find<T>(key);
-
-                if (entity == null)
-                {
-                    throw new Exception("Non-existent id.");
-                }
-                _context.Remove(entity);
-                _context.SaveChanges();
-                return key;
-            });
+            _context.Set<T>().Remove(entity);
+            return await _context.SaveChangesAsync();
         }
 
-        public Task<IQueryable<T>> GetAsync(int page, int maxResults)
+        public async Task<IQueryable<T>> GetAsync(int page, int pageLimit)
         {
-            return Task.Run(() =>
-            {
-                var data = _context.Set<T>().AsQueryable().Skip((page - 1) * maxResults).Take(maxResults);
-                return data.Any() ? data : new List<T>().AsQueryable();
-            });
+            var data =  _context.Set<T>().AsQueryable().Skip((page - 1) * pageLimit).Take(pageLimit);
+            return await data.AnyAsync() ? data : new List<T>().AsQueryable();
         }
 
-        public Task<T?> GetByKey(int key)
+        public async Task<T?> GetAsyncById(int id)
         {
-            return Task.Run(() =>
-            {
-                return _context.Find<T>(key);
-            });
+            return await _context.FindAsync<T>(id);
         }
 
-        public Task<T> Insert(T entity)
+        public async Task<T> InsertAsync(T entity)
         {
-            return Task.Run(() =>
-            {
-                _context.Add(entity);
-                _context.SaveChanges();
-                return entity;
-            });
+            await _context.AddAsync(entity);
+            await _context.SaveChangesAsync();
+            return entity;
         }
 
-        public Task<T> Update(T entity)
+        public async Task<T> UpdateAsync(T entity)
         {
-            return Task.Run(() =>
-            {
-                _context.Update(entity);
-                _context.SaveChanges();
-                return entity;
-            });
+            _context.Update(entity);
+            await _context.SaveChangesAsync();
+            return entity;
         }
     }
 }

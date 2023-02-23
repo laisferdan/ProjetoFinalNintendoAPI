@@ -11,7 +11,7 @@ namespace ProjetoFinalNintendoAPI.Controllers
 {
     [ApiController, Authorize]
     [Route("[controller]")]
-    public class NintendoGamesController : ControllerBase, INintendoController<NintendoGamesModel, NintendoGamesDto, NintendoGamesPatchDto>
+    public class NintendoGamesController : ControllerBase, INintendoController<FilteredNintendoGamesDto, NintendoGamesDto, NintendoGamesPatchDto>
     {
         private readonly IRepository<NintendoGamesModel> _repository;
         public NintendoGamesController(IRepository<NintendoGamesModel> repository)
@@ -33,9 +33,9 @@ namespace ProjetoFinalNintendoAPI.Controllers
         [HttpPost("query")]
         [ProducesResponseType(typeof(NintendoGamesModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(NintendoGamesModel), StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> Post([FromBody] FilteredNintendoGamesDto entity, [FromQuery] int page, int limit)
+        public async Task<IActionResult> SearchAndFilterRecordsWithPagination([FromBody] FilteredNintendoGamesDto entity, [FromQuery] int page, int pageLimit)
         {
-            var games = await _repository.GetAsync(page, limit);
+            var games = await _repository.GetAsync(page, pageLimit);
             var filtered = games.Where(g => g.Title.Contains(entity.Title) || 
             g.Platform.Contains(entity.Platform) || 
             g.Developers.Contains(entity.Developers)).ToList();
@@ -51,9 +51,9 @@ namespace ProjetoFinalNintendoAPI.Controllers
         [ProducesResponseType(typeof(NintendoGamesModel), StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(NintendoGamesModel), StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetAllRecordsWithPagination([FromQuery, Required] int page, [FromQuery, Required] int limit)
+        public async Task<IActionResult> GetAllRecordsWithPagination([FromQuery, Required] int page, [FromQuery, Required] int pageLimit)
         {
-            var games = await _repository.GetAsync(page, limit);
+            var games = await _repository.GetAsync(page, pageLimit);
             if (games == null)
                 return NotFound("Records not found.");
 
@@ -64,9 +64,9 @@ namespace ProjetoFinalNintendoAPI.Controllers
         [ProducesResponseType(typeof(NintendoGamesModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(NintendoGamesModel), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(NintendoGamesModel), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetSingleRecord([FromRoute] int id)
+        public async Task<IActionResult> GetRecordById([FromRoute] int id)
         {
-            var game = await _repository.GetByKey(id);
+            var game = await _repository.GetAsyncById(id);
             if (game == null)
                 return NotFound("Record not found.");
 
@@ -78,10 +78,10 @@ namespace ProjetoFinalNintendoAPI.Controllers
         [ProducesResponseType(typeof(NintendoGamesModel), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(NintendoGamesModel), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(string), StatusCodes.Status415UnsupportedMediaType)]
-        public async Task<IActionResult> Post([FromBody] NintendoGamesDto entity)
+        public async Task<IActionResult> CreateNewRecord([FromBody] NintendoGamesDto entity)
         {
             var gamesToInsert = new NintendoGamesModel(id: 0, entity.Title, entity.Platform, entity.Release_Date, entity.User_Score, entity.Link, entity.Developers);
-            var inserted = await _repository.Insert(gamesToInsert);
+            var inserted = await _repository.InsertAsync(gamesToInsert);
             return Created(string.Empty, inserted);
         }
 
@@ -90,20 +90,20 @@ namespace ProjetoFinalNintendoAPI.Controllers
         [ProducesResponseType(typeof(NintendoGamesModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(NintendoGamesModel), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(string), StatusCodes.Status415UnsupportedMediaType)]
-        public async Task<IActionResult> Put([FromRoute] int id, NintendoGamesDto entity)
+        public async Task<IActionResult> UpdateExistingRecord([FromRoute] int id, NintendoGamesDto entity)
         {
-            var databaseGames = await _repository.GetByKey(id);
+            var databaseGames = await _repository.GetAsyncById(id);
 
             if (databaseGames == null)
             {
                 var gameToInsert = new NintendoGamesModel(id: 0, entity.Title, entity.Platform, entity.Release_Date, entity.User_Score, entity.Link, entity.Developers);
-                var inserted = await _repository.Insert(gameToInsert);
+                var inserted = await _repository.InsertAsync(gameToInsert);
                 return Created(string.Empty, inserted);
             }
 
             databaseGames = UpdateNintendoGamesModel(databaseGames, entity);
 
-            var updated = await _repository.Update(databaseGames);
+            var updated = await _repository.UpdateAsync(databaseGames);
 
             return Ok(updated);
         }
@@ -113,28 +113,28 @@ namespace ProjetoFinalNintendoAPI.Controllers
         [ProducesResponseType(typeof(NintendoGamesModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(NintendoGamesModel), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(string), StatusCodes.Status415UnsupportedMediaType)]
-        public async Task<IActionResult> Patch([FromRoute] int id, [FromBody] NintendoGamesPatchDto entity)
+        public async Task<IActionResult> UpdatePlatformOfExistingRecord([FromRoute] int id, [FromBody] NintendoGamesPatchDto entity)
         {
-            var databaseGames = await _repository.GetByKey(id);
+            var databaseGames = await _repository.GetAsyncById(id);
             if (databaseGames == null)
-                return NotFound("Non-existent id");
+                return NotFound("Id not found.");
 
             databaseGames.Platform = entity.Platform;
-            var updated = await _repository.Update(databaseGames);
+            var updated = await _repository.UpdateAsync(databaseGames);
             return Ok(updated);
         }
 
         [HttpDelete("{id}")]
         [ProducesResponseType(typeof(NintendoGamesModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(NintendoGamesModel), StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Delete([FromRoute] int id)
+        public async Task<IActionResult> DeleteRecord([FromRoute] int id)
         {
-            var databaseNintendo = await _repository.GetByKey(id);
+            var databaseNintendo = await _repository.GetAsyncById(id);
             if (databaseNintendo == null)
-                return NotFound("Non-existent id");
+                return NotFound("Id not found.");
 
-            var deleted = await _repository.Delete(id);
-            return Ok(deleted);
+            await _repository.DeleteAsync(databaseNintendo);
+            return Ok($"Nintendo Game of id {id} has been successfully deleted.");
         }
     }
 }
