@@ -4,12 +4,13 @@ namespace ProjetoFinalNintendoAPI.Interfaces
 {
     public interface INintendoController<T, K, D>
     {
-        Task<IActionResult> GetAllRecordsWithPagination(int page, int limit);
-        Task<IActionResult> GetSingleRecord(int id);
-        Task<IActionResult> Post(K entity);
-        Task<IActionResult> Put(int id, K entity);
-        Task<IActionResult> Patch(int id, D entity);
-        Task<IActionResult> Delete(int id);
+        Task<IActionResult> GetAllRecordsWithPagination(int page, int pageLimit);
+        Task<IActionResult> GetRecordById(int id);
+        Task<IActionResult> SearchAndFilterRecordsWithPagination(T entity, int page, int pageLimit);
+        Task<IActionResult> CreateNewRecord(K entity);
+        Task<IActionResult> UpdateExistingRecord(int id, K entity);
+        Task<IActionResult> UpdatePlatformOfExistingRecord(int id, D entity);
+        Task<IActionResult> DeleteRecord(int id);
 
     }
 }
