@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
 using ProjetoFinalNintendoAPI.Interfaces;
-using ProjetoFinalNintendoAPI.Logs;
+using ProjetoFinalNintendoAPI.Loggers;
 using ProjetoFinalNintendoAPI.Models;
 
 namespace ProjetoFinalNintendoAPI.Filters

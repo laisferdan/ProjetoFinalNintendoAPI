@@ -1,17 +1,14 @@
-using ProjetoFinalNintendoAPI.Context;
-using ProjetoFinalNintendoAPI.Repositories;
-using ProjetoFinalNintendoAPI.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using ProjetoFinalNintendoAPI.AuthorizationAndAuthentication;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using ProjetoFinalNintendoAPI.Filters;
-using ProjetoFinalNintendoAPI.Models;
-using ProjetoFinalNintendoAPI.Dto;
 using Microsoft.OpenApi.Models;
-using static System.Net.Mime.MediaTypeNames;
+using ProjetoFinalNintendoAPI.AuthorizationAndAuthentication;
+using ProjetoFinalNintendoAPI.Data;
+using ProjetoFinalNintendoAPI.Filters;
+using ProjetoFinalNintendoAPI.Interfaces;
+using ProjetoFinalNintendoAPI.Repository;
+using System.Text;
 
 namespace ProjetoFinalNintendoAPI
 {
