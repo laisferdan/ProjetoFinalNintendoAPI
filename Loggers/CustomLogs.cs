@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace ProjetoFinalNintendoAPI.Logs
+namespace ProjetoFinalNintendoAPI.Loggers
 {
     public class CustomLogs
     {
