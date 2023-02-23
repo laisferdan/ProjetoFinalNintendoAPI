@@ -1,8 +1,8 @@
-﻿using ProjetoFinalNintendoAPI.Context;
+﻿using ProjetoFinalNintendoAPI.Data;
 using ProjetoFinalNintendoAPI.Interfaces;
 using ProjetoFinalNintendoAPI.Models;
 
-namespace ProjetoFinalNintendoAPI.Repositories
+namespace ProjetoFinalNintendoAPI.Repository
 {
     public class UsersRepository : IUsersRepository
     {

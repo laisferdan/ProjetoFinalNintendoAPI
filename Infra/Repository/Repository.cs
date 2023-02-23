@@ -1,8 +1,8 @@
 ﻿using ProjetoFinalNintendoAPI.Interfaces;
-using ProjetoFinalNintendoAPI.Context;
+using ProjetoFinalNintendoAPI.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace ProjetoFinalNintendoAPI.Repositories
+namespace ProjetoFinalNintendoAPI.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {

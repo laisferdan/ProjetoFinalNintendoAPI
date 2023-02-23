@@ -1,7 +1,7 @@
 ﻿using ProjetoFinalNintendoAPI.Models;
 using System.Text.Json;
 
-namespace ProjetoFinalNintendoAPI.Context
+namespace ProjetoFinalNintendoAPI.Data
 {
     public class DataGenerator
     {

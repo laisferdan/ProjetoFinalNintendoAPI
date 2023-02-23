@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProjetoFinalNintendoAPI.Models;
 
-namespace ProjetoFinalNintendoAPI.Context
+namespace ProjetoFinalNintendoAPI.Data
 {
     public class InMemoryContext : DbContext
     {
