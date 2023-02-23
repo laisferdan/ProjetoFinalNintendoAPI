@@ -101,8 +101,8 @@ http://localhost:5000
 ### NintendoGames
 |    **Method**                | **Authentication?**    |                      **Description**                     |
 | ---------------------------- | ---------------------- | -------------------------------------------------------- |
-| `GET /NintendoGames/query`   | Yes                    | Search and filter Nintendo Games records with pagination |
 | `GET /NintendoGames`         | Yes                    | Search all Nintendo Games records with pagination        |
+| `GET /NintendoGames/query`   | Yes                    | Search and filter Nintendo Games records with pagination |
 | `GET /NintendoGames/{id} `   | Yes                    | Search a Nintendo Games record by its id                 |
 | `POST /NintendoGames`        | Yes                    | Create a new Nintendo Game record                        |
 | `PUT /NintendoGames/{id} `   | Yes                    | Update an existing record or Create a new record         |
@@ -179,5 +179,112 @@ See more details in the [Authentication](#Authentication) topic.
 </tr>
 </table>
 
-<br />
+<br/>
+
+## Search all Nintendo Games records with pagination
+This endpoint returns information about all Nintendo Games records with pagination.
+
+### Endpoint
+`GET/ NintendoGames`
+
+### Query Parameters
+|  **Name**  | **Type** | **Required?** | Example |
+| ---------- | -------- | ------------- | ------- |
+| page       | integer  | Yes           | 1       |
+| limit      | integer  | Yes           | 15      |
+
+### Request Body
+Request body is not necessary.
+
+### Authentication <a name="Authentication"></a>
+You need to append a token on header's request. <br/>
+See more details in the [Authentication](#Authentication) topic.
+
+### Responses
+<table>
+  <tr>
+    <td> <strong>Status</strong> </td>
+    <td> <strong>Description</strong> </td>
+    <td> <strong>Example</strong> </td>
+  </tr>
+  <tr>
+    <td> 200 - OK </td>
+    <td> An array of records and a pagination info are returned </td>
+    <td>
+
+```json
+[
+  {
+    "id": 1,
+    "title": "Super Mario 3D World + Bowser's Fury",
+    "platform": "Switch",
+    "release_date": "Feb 12, 2021",
+    "user_score": "",
+    "link": "/game/switch/super-mario-3d-world-+-bowsers-fury",
+    "developers": "['Nintendo']"
+  },
+  {
+    "id": 2,
+    "title": "Super Smash Bros. Ultimate: Sephiroth",
+    "platform": "Switch",
+    "release_date": "Dec 22, 2020",
+    "user_score": "",
+    "link": "/game/switch/super-smash-bros-ultimate-sephiroth",
+    "developers": "['Nintendo']"
+  }
+]
+```
+
+</td>
+  </tr>
+<tr>
+<td> 400 – Bad Request </td>
+<td> Invalid Query parameters </td>
+<td>
+
+```json
+{
+  "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+  "title": "One or more validation errors occurred.",
+  "status": 400,
+  "traceId": "00-305fc97c9374fd546a5b481e509d88e3-8a02025c8e61facf-00",
+  "errors": {
+    "page": [
+      "The value '695846122121' is not valid."
+    ]
+  }
+}
+```
+<tr>
+<td> 404 – Not Found </td>
+<td> Invalid URL </td>
+<td>
+
+```json
+{
+  "message": "An unexpected error has occurred!"
+}
+```
+
+</td>
+</tr>
+
+<tr>
+<td> 500 - Internal Server Error </td>
+<td> General error message </td>
+<td>
+
+```json
+{
+  "message": "An unexpected error has occurred!"
+}
+```
+
+</td>
+</tr>
+
+</td>
+</tr>
 </table>
+
+<br/>
