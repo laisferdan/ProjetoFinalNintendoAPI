@@ -11,11 +11,11 @@ namespace ProjetoFinalNintendoAPI.Controllers
     [AllowAnonymous]
     public class LoginController : ControllerBase
     {
-        private readonly IUsersRepository<UsersModel> _repository;
+        private readonly IUsersRepository _repository;
         private readonly GenerateToken _generateToken;
         private readonly IConfiguration _configuration;
 
-        public LoginController(IUsersRepository<UsersModel> repository, GenerateToken generateToken, IConfiguration configuration)
+        public LoginController(IUsersRepository repository, GenerateToken generateToken, IConfiguration configuration)
         {
             _repository = repository;
             _generateToken = generateToken;

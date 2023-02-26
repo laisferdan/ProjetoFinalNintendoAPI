@@ -2,10 +2,10 @@
 
 namespace ProjetoFinalNintendoAPI.Interfaces
 {
-    public interface IUsersRepository<T> where T : class
+    public interface IUsersRepository
     {
-        Task<IQueryable<T>> GetUserAsyncWithPagination(int page, int pageLimit);
-        Task<T?> GetUserAsyncByNameAndPassword(string username, string password);
-        Task<T> InsertUserAsync(T user);
+        Task<IQueryable<UsersModel>> GetUserAsyncWithPagination(int page, int pageLimit);
+        Task<UsersModel> GetUserAsyncByNameAndPassword(string username, string password);
+        Task<UsersModel> InsertUserAsync(UsersModel user);
     }
 }
