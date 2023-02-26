@@ -29,7 +29,7 @@ namespace ProjetoFinalNintendoAPI.Controllers
         {
             var username = _configuration["UserAuthentication:username"];
             var password = _configuration["UserAuthentication:password"];
-            var user = await _repository.Get(request.Username, request.Password);
+            var user = await _repository.GetUserAsyncByNameAndPassword(request.Username, request.Password);
             if (username != request.Username && password != request.Password)
                 return Unauthorized(new { message = "Invalid username or password" });
 
