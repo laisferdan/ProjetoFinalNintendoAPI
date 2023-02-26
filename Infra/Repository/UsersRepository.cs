@@ -1,10 +1,11 @@
 ﻿using ProjetoFinalNintendoAPI.Data;
 using ProjetoFinalNintendoAPI.Interfaces;
 using ProjetoFinalNintendoAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ProjetoFinalNintendoAPI.Repository
 {
-    public class UsersRepository : IUsersRepository
+    public class UsersRepository<T> : IUsersRepository<T> where T : class
     {
         private readonly InMemoryContext _context;
         public UsersRepository(InMemoryContext context)
@@ -12,13 +13,10 @@ namespace ProjetoFinalNintendoAPI.Repository
             _context = context;
         }
 
-        public Task<List<UsersModel>> Get(int page, int maxResults)
+        public async Task<IQueryable<T>> GetAsync(int page, int pageLimit)
         {
-            return Task.Run(() =>
-            {
-                var users = _context.Users.Skip((page - 1) * maxResults).Take(maxResults).ToList();
-                return users.Any() ? users : new List<UsersModel>();
-            });
+                var users = _context.Set<T>().AsQueryable().Skip((page - 1) * pageLimit).Take(pageLimit);
+                return await users.AnyAsync() ? users : new List<T>().AsQueryable();
         }
 
         public Task<UsersModel?> Get(string username, string password)

@@ -2,9 +2,9 @@
 
 namespace ProjetoFinalNintendoAPI.Interfaces
 {
-    public interface IUsersRepository
+    public interface IUsersRepository<T> where T : class
     {
-        Task<List<UsersModel>> Get(int page, int maxResults);
+        Task<IQueryable<T>> GetAsync(int page, int pageLimit);
         Task<UsersModel?> Get(string username, string password);
         Task<UsersModel> Insert(UsersModel user);
     }

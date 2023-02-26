@@ -60,7 +60,7 @@ namespace ProjetoFinalNintendoAPI
             .UseInMemoryDatabase("NintendoGames"));
 
             builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-            builder.Services.AddScoped(typeof(IUsersRepository), typeof(UsersRepository));
+            builder.Services.AddScoped(typeof(IUsersRepository<>), typeof(UsersRepository<>));
 
             var tokenConfiguration = new TokenConfiguration();
             new ConfigureFromConfigurationOptions<TokenConfiguration>(builder.Configuration.GetSection("TokenConfiguration")).Configure(tokenConfiguration);
