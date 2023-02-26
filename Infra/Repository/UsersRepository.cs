@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ProjetoFinalNintendoAPI.Repository
 {
-    public class UsersRepository<T> : IUsersRepository<T> where T : class
+    public class UsersRepository : IUsersRepository
     {
         private readonly InMemoryContext _context;
         public UsersRepository(InMemoryContext context)
@@ -13,19 +13,19 @@ namespace ProjetoFinalNintendoAPI.Repository
             _context = context;
         }
 
-        public async Task<IQueryable<T>> GetUserAsyncWithPagination(int page, int pageLimit)
+        public async Task<IQueryable<UsersModel>> GetUserAsyncWithPagination(int page, int pageLimit)
         {
-                var users = _context.Set<T>().AsQueryable().Skip((page - 1) * pageLimit).Take(pageLimit);
-                return await users.AnyAsync() ? users : new List<T>().AsQueryable();
+                var users = _context.Set<UsersModel>().AsQueryable().Skip((page - 1) * pageLimit).Take(pageLimit);
+                return await users.AnyAsync() ? users : new List<UsersModel>().AsQueryable();
         }
 
-        public async Task<T?> GetUserAsyncByNameAndPassword(string username, string password)
+        public async Task<UsersModel?> GetUserAsyncByNameAndPassword(string username, string password)
         {
             var user = await _context.Users.FirstOrDefaultAsync(item => item.Username.Equals(username) && item.Password.Equals(password));
             return user;
         }
 
-        public async Task<T> InsertUserAsync(T user)
+        public async Task<UsersModel> InsertUserAsync(UsersModel user)
         {
             await _context.AddAsync(user);
             await _context.SaveChangesAsync();
