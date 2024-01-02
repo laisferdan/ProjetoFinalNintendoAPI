@@ -1,32 +1,32 @@
-﻿# ProjetoFinalNintendoAPI
-Criar uma API REST de acordo com os requisitos listados abaixo:
-- [x] O sistema deve ter um mecanismo de login usando JWT, com um endpoint que recebe `{ "login":"usuario", "senha":"m1nh@s3nh@"}` e gera um token;
-- [x] O JWT deve ter, as seguintes claims:
-* iss - nome do desenvolvedor;
-* exp - 2 horas;
-* sub - nome da api;
+﻿# ProjetoFinalNintendoAPI (in english, FinalProjectNintendoAPI)
+Create a REST API according to the requirements listed below:
+- [x] The system must have a login mechanism using JWT, with an endpoint that receives `{ "login":"usuario", "password":"m1nh@s3nh@"}` and generates a token;
+- [x] The JWT must have the following claims:
+* iss - developer name;
+* exp - 2 hours;
+* sub - name of the api;
 * aud - "ada";
 * module - "Web III .net".
-- [x] O sistema deve ter um middleware que valide se o token é correto, valido e não está expirado, antes de permitir acesso a qualquer outro endpoint. Em caso negativo retorne status 401;
-- [x] O login e senha fornecidos devem estar em variáveis de ambiente e terem uma versão para o ambiente de desenvolvimento vinda de um arquivo de configuração no .NET. Esse arquivo não deve subir ao GIT, mas sim um arquivo de exemplo sem os valores reais. O mesmo vale para qualquer "segredo" do sistema, como a chave do JWT;
-- [x] Os endpoints da aplicação devem usar a porta 5000 e ser:
+- [x] The system must have middleware that validates that the token is correct, valid and not expired, before allowing access to any other endpoint. If not, return status 401;
+- [x] The login and password provided must be in environment variables and have a version for the development environment coming from a .NET configuration file. This file should not be uploaded to GIT, but rather an example file without the actual values. The same goes for any system "secret", like the JWT key;
+- [x] Application endpoints must use port 5000 and be:
 * (POST)      http://0.0.0.0:5000/login/
-* (POST)      http://0.0.0.0:5000/api_controller/query    Obs: Deve ser possível filtrar os dados informando um corpo (body), e deve ser paginado
-* (GET)       http://0.0.0.0:5000/api_controller/         Obs: As consultas devem ser paginadas
+* (POST)      http://0.0.0.0:5000/api_controller/query    Note: It must be possible to filter the data by entering a body, and it must be paginated
+* (GET)       http://0.0.0.0:5000/api_controller/         Note: Queries must be paged
 * (GET)       http://0.0.0.0:5000/api_controller/{id}
 * (POST)      http://0.0.0.0:5000/api_controller/
 * (PUT)       http://0.0.0.0:5000/api_controller/{id}
 * (PATCH)     http://0.0.0.0:5000/api_controller/{id}
 * (DELETE)    http://0.0.0.0:5000/api_controller/{id}
-- [x] Para inserir um registro não deve ser informado o Id;
-- [x] Para atualizar os dados com PATCH, devem ser enviados somente os campos que serão alterados (exceto o Id);
-- [x] Para atualizar os dados com PUT, devem ser enviados todos os campos no body (exceto o Id);
-- [x]  A paginação e os filtros para pesquisa podem ser feita tanto no repositório quanto utilizando funções lambda na controller;
-- [x]  Todas as controllers e endpoints devem definir as responses válidos e inválidos e o tipo de objeto que retorna (model);
-- [x]  Deve ser usada alguma forma de persistência. Pode-se usar o Entity Framework (in-memory), arquivo de texto, json, dicionário, etc;
-- [ ]  Se preferir optar por utilizar um banco de dados "real", adicione um docker-compose em seu repositório que coloque a aplicação e o banco em execução, quando executado docker-compose up na raiz. A connection string e a senha do banco devem ser setados por arquivo de configuração nesse arquivo;
-- [x]  Faça um filter, e crie uma classe específica para gravar logs,  que escreva no console sempre que os endpoints de alteração (put, patch) ou remoção (delete) forem usados, indicando o horário formatado como o datetime a seguir: `01/01/2021 13:45:00`. A linha de log deve ter o seguinte formato (se a requisição for válida):  `<datetime> - Game <id> - <titulo> - <Remover|Alterar (e descrever a alteração)>`;
-- [x]  A aplicação deve ser configurada para aceitar requests apenas da url "localhost";
-- [x]  O projeto deve ser colocado em um repositório GITHUB ou equivalente, estar público, e conter um readme.md que explique em detalhes qualquer comando ou configuração necessária para fazer o projeto rodar. Por exemplo, como configurar as variáveis de ambiente, como rodar migrations (se foram usadas);
-- [x]  A entrega será a URL do repositório ou arquivo zipado;
-- [x]  Entrega até o dia 18/09/2022, às 00:00, via Class.
+- [x] To insert a record, the ID must not be entered;
+- [x] To update data with PATCH, only the fields that will be changed (except the Id) must be sent;
+- [x] To update the data with PUT, all fields in the body (except the Id) must be sent;
+- [x] Pagination and search filters can be done both in the repository and using lambda functions in the controller;
+- [x] All controllers and endpoints must define valid and invalid responses and the type of object that returns (model);
+- [x] Some form of persistence must be used. You can use the Entity Framework (in-memory), text file, json, dictionary, etc.;
+- [ ] If you prefer to choose to use a "real" database, add a docker-compose in your repository that puts the application and the database running, when run docker-compose up in the root. The connection string and bank password must be set by configuration file in this file;
+- [x] Make a filter, and create a specific class to record logs, which writes to the console whenever the change (put, patch) or removal (delete) endpoints are used, indicating the time formatted as the following datetime: `01/01 /2021 13:45:00`. The log line must have the following format (if the request is valid): `<datetime> - Game <id> - <title> - <Remove|Change (and describe the change)>`;
+- [x] The application must be configured to accept requests only from the "localhost" url;
+- [x] The project must be placed in a GITHUB repository or equivalent, be public, and contain a readme.md that explains in detail any commands or configuration necessary to make the project run. For example, how to configure environment variables, how to run migrations (if they were used);
+- [x] Delivery will be the URL of the repository or zipped file;
+- [x] Delivery until 09/18/2022, at 00:00, via Class.
